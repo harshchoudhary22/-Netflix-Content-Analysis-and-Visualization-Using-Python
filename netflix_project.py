@@ -4,7 +4,6 @@ df = pd.read_csv('netflix_titles.csv')
 
 df = df.dropna(subset=['type','title','country','release_year','rating','duration'])
 
-"""
 # how manys movies and tv shows
 count_types = df['type'].value_counts()
 
@@ -16,9 +15,9 @@ plt.ylabel("Count")
 plt.tight_layout()
 plt.savefig('movies vs tv.png',dpi=300)
 plt.show()
-"""
 
-
+# what is the percenatge of each content rating(PG, R,TV-MA)
+# plot a pie chart
 
 type_rating = df['rating'].value_counts()
 
@@ -34,7 +33,6 @@ plt.show()
 # how has the number of release changed over the years  
 # plot a line
 
-"""
 count_release = df['release_year'].value_counts()
 
 
@@ -47,13 +45,11 @@ plt.grid(True)
 plt.legend()
 plt.savefig('releases.png',dpi=300)
 plt.show()
-"""
 
 
 
 #what is the distrubation of movies duration 
 #plot a histogram
-""""
 
 movies_df = df[df['type'] == 'Movie'].copy()
 movies_df['duration_int'] = movies_df['duration'].str.replace("min"," ").astype(int)
@@ -66,11 +62,12 @@ plt.ylabel('Number of Movies')
 plt.legend()
 plt.savefig('movies_duration.png',dpi=300)
 plt.show()
-"""
+
+
 #relationship   between relese year and number o shows
 #plot a scatter plot
 
-"""
+
 type_release = df['release_year'].value_counts().sort_index()
 plt.figure(figsize=(10,6))
 plt.scatter(type_release.index, type_release.values,color = 'red',label='relese_years over the shows')
@@ -82,11 +79,11 @@ plt.tight_layout()
 plt.savefig('scatter_release year.png')
 plt.show()
 
-"""
+
 
 # top 10 countries with the highest number of shows
 # plot bar chart horizontal
-"""
+
 
 top_country = df['country'].value_counts().head(10)
 plt.figure(figsize=(10,6))
@@ -99,11 +96,9 @@ plt.tight_layout()
 plt.savefig('top countries data_barh.png')
 plt.show()
 
-"""
 # compare movies vs tv shows
 # using subplot
 
-"""
 content_by_year = df.groupby(['release_year','type']).size().unstack().fillna(0)
 fig , ax = plt.subplots(1,2, figsize=(12,5))
 ax[0].plot(content_by_year.index,content_by_year['Movie'],color='red',label = 'no of movies')
